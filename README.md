@@ -1,28 +1,28 @@
 # Danbooru Tagger — ForgeNeo Extension
 
-Расширение добавляет в txt2img/img2img аккордеон **"🏷️ Danbooru Tagger"**
-(аналогично ADetailer). При включении генерирует теги через твою DanbooruAI-модель
-и вставляет их в промпт перед диффузией.
+This extension adds a **"🏷️ Danbooru Tagger"** accordion to txt2img/img2img  
+(similar to ADetailer). When enabled, it generates tags using your DanbooruAI model  
+and inserts them into the prompt before diffusion.
 
 ---
 
-## Быстрый старт
+## Quick Start
 
-### 1. Установи расширение
+### 1. Install the extension
 
-Скопируй папку `danbooru-tagger` в директорию расширений ForgeNeo:
+Copy the `danbooru-tagger` folder into the ForgeNeo extensions directory:
 
 ```
 ForgeNeo/
   extensions/
-    danbooru-tagger/   ← сюда
+    danbooru-tagger/   ← place it here
 ```
 
 ---
 
-### 2. Файлы модели и словаря
+### 2. Model and vocabulary files
 
-Уже лежат внутри расширения (скопированы автоматически):
+Already included inside the extension (copied automatically):
 
 ```
 danbooru-tagger/
@@ -34,25 +34,25 @@ danbooru-tagger/
 
 ---
 
-### 3. Python-файлы модели
+### 3. Model Python files
 
-Тоже уже скопированы:
+Also already included:
 
 ```
 danbooru-tagger/
   tagger_lib/
-    generate.py           ✓  (из DanbooruAI/src/)
-    tagger_model.py       ✓  (из DanbooruAI/src/)
-    inference.py          ✓  (обёртка расширения)
+    generate.py
+    tagger_model.py
+    inference.py
 ```
 
 ---
 
-### 4. Safety-профили (необязательно)
+### 4. Safety profiles (optional)
 
-Профили — это `.txt`-файлы с секциями `[banlist]` и `[whitelist]`.
+Profiles are `.txt` files with `[banlist]` and `[whitelist]` sections.
 
-Скопируй из `DanbooruAI/data/profiles/` в:
+Copy them from `DanbooruAI/data/profiles/` into:
 
 ```
 danbooru-tagger/
@@ -63,7 +63,7 @@ danbooru-tagger/
       ud_violence.txt
 ```
 
-Формат файла:
+File format:
 
 ```
 [banlist]
@@ -74,24 +74,24 @@ another_tag
 allowed_tag
 ```
 
-Если профилей нет — фильтрация просто не применяется.
+If no profiles are provided, filtering will simply not be applied.
 
 ---
 
-## Итоговая структура
+## Final structure
 
 ```
 danbooru-tagger/
 ├── scripts/
-│   └── danbooru_tagger.py     ← главный скрипт Forge (UI + хук)
+│   └── danbooru_tagger.py     ← main Forge script (UI + hook)
 ├── tagger_lib/
 │   ├── __init__.py
-│   ├── inference.py           ← singleton-обёртка
-│   ├── generate.py            ← из DanbooruAI/src/
-│   └── tagger_model.py        ← из DanbooruAI/src/
+│   ├── inference.py           
+│   ├── generate.py            
+│   └── tagger_model.py        
 ├── data/
 │   ├── vocab_clean.json
-│   └── profiles/              ← необязательно
+│   └── profiles/              ← optional
 ├── model/
 │   └── tagger_clean.pth
 ├── install.py
@@ -100,27 +100,27 @@ danbooru-tagger/
 
 ---
 
-## Параметры UI
+## UI Parameters
 
-| Параметр | Описание |
-|----------|----------|
-| **Enable** | Включить расширение |
-| **Mode** | `abstract` — теги по затравкам (без затравок в выводе) / `addit` — расширить промпт |
-| **Вставить в промпт** | `prepend` — перед промптом / `append` — после / `replace` — заменить |
-| **Seed tags** | Входные теги (через запятую). Пусто = взять из текущего промпта |
-| **Кол-во тегов** | Количество генерируемых тегов |
-| **Temperature** | 0.1 = предсказуемо / 2.0 = творчески |
-| **Spread** | Nucleus p: 0.1 = близкие темы / 1.0 = далёкие |
-| **Сортировать теги** | Алфавитная сортировка |
-| **Safety profiles** | ud_age / ud_animals / ud_violence |
-| **🔍 Preview tags** | Генерация без запуска диффузии |
+| Parameter              | Description                                                                                  |
+| ---------------------- | -------------------------------------------------------------------------------------------- |
+| **Enable**             | Enable the extension                                                                         |
+| **Mode**               | `abstract` — generate tags from seeds (not included in output) / `addit` — extend the prompt |
+| **Insert into prompt** | `prepend` — before prompt / `append` — after / `replace` — replace                           |
+| **Seed tags**          | Input tags (comma-separated). Empty = use current prompt                                     |
+| **Tag count**          | Number of generated tags                                                                     |
+| **Temperature**        | 0.1 = predictable / 2.0 = creative                                                           |
+| **Spread**             | Nucleus p: 0.1 = close topics / 1.0 = distant                                                |
+| **Sort tags**          | Alphabetical sorting                                                                         |
+| **Safety profiles**    | ud_age / ud_animals / ud_violence                                                             |
+| **🔍 Preview tags**    | Generate without running diffusion                                                           |
 
 ---
 
-## Отладка
+## Debugging
 
-Все сообщения начинаются с `[DanbooruTagger]` — смотри консоль ForgeNeo.
+All messages start with `[DanbooruTagger]` — check the ForgeNeo console.
 
-- Модель не загружается → проверь пути в консоли
-- `tagger_model.py` не найден → убедись что он в `tagger_lib/`
-- Профиль не найден → расширение продолжит работу без него
+- Model not loading → check paths in console
+- `tagger_model.py` not found → make sure it exists in `tagger_lib/`
+- Profile not found → extension will continue without it
