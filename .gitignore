@@ -1,0 +1,18 @@
+# ── Models (distributed via GitHub Releases) ─────────────────────────────────
+model/*.pth
+
+# ── Python cache ──────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# ── Temp files ────────────────────────────────────────────────────────────────
+*.log
+*.tmp
+tagger_lib/model_unused.py
+
+# ── Data (not needed in repo) ─────────────────────────────────────────────────
+data/*.jsonl
+data/*.json.bak

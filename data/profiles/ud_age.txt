@@ -1,0 +1,43 @@
+# Unstable Diffusion — Age & Appearance banlist
+# Rule 3: Characters must be canonically 18+
+# Rule 3: School uniforms and youth-related themes not allowed
+# Rule 3: Chibi/nendoroid allowed only in SFW without underaged characters
+
+[banlist]
+# Явные маркеры несовершеннолетних
+child, toddler, baby, aged_down, underage, minor, juvenile, young
+
+# Стиль / пропорции
+chibi, nendoroid, big_head, babyface, petite
+
+# Школьная тема
+school_uniform, serafuku, school_swimsuit, school_bag, school_hat
+sailor_collar, randoseru, kindergarten_uniform, gym_uniform, bloomers
+
+# Скауты
+girl_scout
+
+# Телосложение (в сочетании с другими тегами может быть проблемой)
+flat_chest, small_breasts, tiny_breasts
+
+# Семейные отношения (косвенно указывают на детей)
+father_and_son, mother_and_son, father_and_daughter, mother_and_daughter
+parent_and_child, siblings, brother_and_sister, sister_and_brother
+loli, shota, elementary_school, preschool, nursery
+
+# Возрастные маркеры
+age_difference, age_gap, older_man, younger_girl, younger_boy
+teen, teenager, adolescent, preteen
+
+# Одежда связанная с детьми
+diaper, onesie, training_bra, childcare
+
+# Blue Archive (игра со школьницами)
+blue_archive, abydos_high_school, gehenna_academy, millennium_science_school
+trinity_general_school, hyakkiyako_academy, shanhaijing_academy, valkyrie_police_school
+arius_squad, red_winter_federal_academy, schale, sensei_(blue_archive)
+
+# Нимбы (halo) — характерный элемент Blue Archive
+halo, blue_halo, red_halo, yellow_halo, green_halo, pink_halo
+orange_halo, white_halo, black_halo, purple_halo, triangle_halo
+square_halo, cross_halo, multiple_halos

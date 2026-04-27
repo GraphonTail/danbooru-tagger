@@ -1,0 +1,16 @@
+# Unstable Diffusion — Violence & Non-con banlist
+# Rule 5: No rape, non-consensual, coerced scenarios
+# Rule 5: No unconscious/restrained/prisoner participants
+# Rule 5: Violence policy extends to sexual scenarios
+
+[banlist]
+# Non-consensual
+rape, non_consensual, nonconsensual, forced, coerced
+sleep_molestation, drugged
+
+# Беспомощные участники
+unconscious, restrained, bound, prisoner, captive, handcuffed
+
+# Жёсткое насилие
+guro, gore, torture, snuff, vore, cannibalism
+necrophilia, mutilation, decapitation, dismemberment, hanging, execution

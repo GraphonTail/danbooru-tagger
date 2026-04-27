@@ -1,0 +1,8 @@
+# Unstable Diffusion — Feral/Animals banlist
+# Rule 5: No feral (real animals) in NSFW context
+# Note: anthro/furry is allowed, feral is not
+
+[banlist]
+# Реальные животные в NSFW
+feral, bestiality, zoophilia
+horse, dog_penis, animal_penis
