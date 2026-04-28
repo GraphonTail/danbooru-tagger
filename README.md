@@ -1,6 +1,6 @@
 # Danbooru Tagger
 
-An AI-powered tag generator for **Stable Diffusion Forge / ForgeNeo**, trained on **11.8 million Danbooru posts**.
+An AI-powered tag generator for **Stable Diffusion Forge / ForgeNeo**, trained on **1 million (future 11.8 m) Danbooru posts**.
 
 Generates contextual booru-style tags from your prompt before each diffusion run, enriching and diversifying the final image.
 
