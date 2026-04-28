@@ -1,126 +1,110 @@
-# Danbooru Tagger — ForgeNeo Extension
+# Danbooru Tagger
 
-This extension adds a **"🏷️ Danbooru Tagger"** accordion to txt2img/img2img  
-(similar to ADetailer). When enabled, it generates tags using your DanbooruAI model  
-and inserts them into the prompt before diffusion.
+An AI-powered tag generator for **Stable Diffusion Forge / ForgeNeo**, trained on **11.8 million Danbooru posts**.
 
----
-
-## Quick Start
-
-### 1. Install the extension
-
-Copy the `danbooru-tagger` folder into the ForgeNeo extensions directory:
-
-```
-ForgeNeo/
-  extensions/
-    danbooru-tagger/   ← place it here
-```
+Generates contextual booru-style tags from your prompt before each diffusion run, enriching and diversifying the final image.
 
 ---
 
-### 2. Model and vocabulary files
+## How it works
 
-Already included inside the extension (copied automatically):
+```
+Your prompt  →  Tagger  →  Extended prompt  →  Stable Diffusion  →  Image
+```
+
+The tagger samples tags conditioned on your existing prompt and merges them back in before diffusion runs. Use **Preview tags** to inspect the output without generating an image — results can be copied to clipboard or injected directly into the prompt field.
+
+---
+
+## Installation
+
+**From URL** *(recommended)*
+
+1. Open **Forge → Extensions → Install from URL**
+2. Paste `https://github.com/GraphonTail/danbooru-tagger`
+3. Click **Install**, then **Apply and restart UI**
+
+**Manual**
+
+```bash
+cd /path/to/forge/extensions
+git clone https://github.com/GraphonTail/danbooru-tagger
+```
+
+---
+
+## Model files
+
+The weights are too large for GitHub. Download them from the **[Releases page](https://github.com/GraphonTail/danbooru-tagger/releases)** and place them here:
 
 ```
 danbooru-tagger/
-  data/
-    vocab_clean.json      ✓
-  model/
-    tagger_clean.pth      ✓
+├── model/
+│   └── tagger_clean.pth        ← download from Releases
+└── data/
+    └── vocab_clean.json        ← download from Releases
 ```
+
+On the next Forge launch, `install.py` will print a warning with the exact expected paths if either file is missing.
 
 ---
 
-### 3. Model Python files
+## UI controls
 
-Also already included:
+| Control | Description |
+|---------|-------------|
+| **Enable** | Header toggle — enables or disables the tagger for this generation |
+| **Model** | Select any `.pth` file from the `model/` folder |
+| **Insert mode** | How tags are merged into your prompt: `prepend` (before) or `append` (after) |
+| **Tag count** | Number of tags to generate (1 – 500) |
+| **Temperature** | Creativity / randomness (0.1 – 50). Recommended: 0.75 – 1.25 |
+| **Spread** | Topic diversity (0.1 – 50). Recommended: 1.0 – 2.0 |
+| **Safety profile** | Optional tag filter — select a `.txt` profile from `data/profiles/` |
+| **Preview tags** | Generate and display tags without running diffusion |
 
-```
-danbooru-tagger/
-  tagger_lib/
-    generate.py
-    tagger_model.py
-    inference.py
-```
+The **Preview** panel includes two buttons:
+- **Copy** — copies the generated tags to clipboard
+- **Inject** — inserts the tags directly into the active prompt field
 
 ---
 
-### 4. Safety profiles (optional)
+## Safety profiles
 
-Profiles are `.txt` files with `[banlist]` and `[whitelist]` sections.
-
-Copy them from `DanbooruAI/data/profiles/` into:
+Create `.txt` files in `data/profiles/` to block or explicitly allow specific tags:
 
 ```
-danbooru-tagger/
-  data/
-    profiles/
-      ud_age.txt
-      ud_animals.txt
-      ud_violence.txt
+data/profiles/
+└── my_profile.txt
 ```
 
-File format:
-
-```
+```ini
 [banlist]
-tag_one, tag_two
-another_tag
+gore, violence, nsfw_tag
 
 [whitelist]
-allowed_tag
+safe_tag
 ```
 
-If no profiles are provided, filtering will simply not be applied.
+Use the **⟳ Refresh** button to rescan the folder without restarting Forge.
 
 ---
 
-## Final structure
+## Multiple models
 
-```
-danbooru-tagger/
-├── scripts/
-│   └── danbooru_tagger.py     ← main Forge script (UI + hook)
-├── tagger_lib/
-│   ├── __init__.py
-│   ├── inference.py           
-│   ├── generate.py            
-│   └── tagger_model.py        
-├── data/
-│   ├── vocab_clean.json
-│   └── profiles/              ← optional
-├── model/
-│   └── tagger_clean.pth
-├── install.py
-└── README.md
-```
+Drop additional `.pth` files into `model/` and their matching vocabulary files into `data/`. The **Model** dropdown lists all available weights — no restart required.
+
+**Planned variants:** General · Safe · Explicit · Furry · Chaos
 
 ---
 
-## UI Parameters
+## Requirements
 
-| Parameter              | Description                                                                                  |
-| ---------------------- | -------------------------------------------------------------------------------------------- |
-| **Enable**             | Enable the extension                                                                         |
-| **Mode**               | `abstract` — generate tags from seeds (not included in output) / `addit` — extend the prompt |
-| **Insert into prompt** | `prepend` — before prompt / `append` — after / `replace` — replace                           |
-| **Seed tags**          | Input tags (comma-separated). Empty = use current prompt                                     |
-| **Tag count**          | Number of generated tags                                                                     |
-| **Temperature**        | 0.1 = predictable / 2.0 = creative                                                           |
-| **Spread**             | Nucleus p: 0.1 = close topics / 1.0 = distant                                                |
-| **Sort tags**          | Alphabetical sorting                                                                         |
-| **Safety profiles**    | ud_age / ud_animals / ud_violence                                                             |
-| **🔍 Preview tags**    | Generate without running diffusion                                                           |
+- Stable Diffusion Forge or ForgeNeo
+- Python 3.10+
+- PyTorch (bundled with Forge — no separate install needed)
 
 ---
 
-## Debugging
+## License
 
-All messages start with `[DanbooruTagger]` — check the ForgeNeo console.
-
-- Model not loading → check paths in console
-- `tagger_model.py` not found → make sure it exists in `tagger_lib/`
-- Profile not found → extension will continue without it
+[MIT](LICENSE)
