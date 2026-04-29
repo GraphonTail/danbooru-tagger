@@ -1,18 +1,22 @@
-# ── Models (distributed via GitHub Releases) ─────────────────────────────────
+# ── Model weights (distributed via GitHub Releases, not stored in git) ────────
 model/*.pth
+
+# ── Vocabulary (distributed via GitHub Releases) ──────────────────────────────
+data/vocab_clean.json
 
 # ── Python cache ──────────────────────────────────────────────────────────────
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
 
-# ── Temp files ────────────────────────────────────────────────────────────────
+# ── Artefacts / leftover folders ──────────────────────────────────────────────
+danbooru-tagger/
+profiles/
+
+# ── Dev / scratch files ────────────────────────────────────────────────────────
 *.log
 *.tmp
 tagger_lib/model_unused.py
-
-# ── Data (not needed in repo) ─────────────────────────────────────────────────
 data/*.jsonl
 data/*.json.bak
